@@ -19,12 +19,19 @@
         <h2>Kategori</h2>
         <a href="{{ route('kategori.create') }}" style="margin-top: 10px;" class="btn btn-success">Tambah Kategori</a>
         
-        {{-- @error('error')
-            <div class="alert alert-danger" role="alert">
-                {{$message}}
-
+        @if(session('error'))
+            <div class="alert alert-danger" style="margin-top: 20px;">
+                {{ session('error') }}
             </div>
-        @enderror --}}
+
+            @if(session('showErrorAlert'))
+                <script>
+                    setTimeout(function () {
+                        document.querySelector('.alert').style.display = 'none';
+                    }, 15000); // Atur waktu tampilan alert (15 detik)
+                </script>
+            @endif
+        @endif
 
         <table class="table" style="margin-top: 10px;">
             <thead>
@@ -46,18 +53,18 @@
                             <form id="deleteForm" action="{{ route('kategori.delete', $kategori->id_kategori) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="confirmDelete()">Hapus</button>
+                                <button type="submit" class="btn btn-danger" onclick="confirmDelete(event)">Hapus</button>
                             </form>
+
                             <script>
-                                function confirmDelete() {
-                                    if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
-                                        document.getElementById('deleteForm').submit();
-                                    } else {
+                                function confirmDelete(event) {
+                                    if (!confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+                                        event.preventDefault(); // Mencegah pengiriman formulir jika pengguna memilih "Cancel"
                                         alert("Penghapusan produk dibatalkan.");
                                         // atau tambahkan tindakan lainnya jika diperlukan
                                     }
                                 }
-                            </script>                            
+                            </script>
                         </td>
                     </tr>
                 @endforeach

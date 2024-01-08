@@ -78,7 +78,10 @@ class kategoricontroller extends Controller
         $produkCount = produk::where('id_kategori', $id_kategori)->count();
         // dd($produkCount); 
         if ($produkCount > 0) {
-            return redirect()->route('kategori.index')->with('error', 'Tidak dapat menghapus kategori ini karena masih ada produk terkait.');
+            return redirect()
+            ->route('kategori.index')
+            ->with('error', 'Tidak dapat menghapus kategori ini karena masih ada produk terkait.')
+            ->with('showErrorAlert', true);
         }
 
         // Hapus kategori jika tidak ada produk terkait
