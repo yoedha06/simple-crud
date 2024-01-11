@@ -14,7 +14,7 @@
                     <div class="card-header">Edit Produk</div>
     
                     <div class="card-body">
-                        <form action="{{ route('produk.update', $produk->id_produk) }}" method="POST">
+                        <form action="{{ route('admin.produk-berelasi.update', $produk->id_produk) }}" method="POST">
                             @csrf
     
                             <div class="form-group">
@@ -62,7 +62,7 @@
                                     </div>
                                 @endif
                                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                <a href="{{ route('produk.index') }}" class="btn btn-secondary">Batal</a>
+                                <a href="{{ route('admin.produk-berelasi.index') }}" class="btn btn-secondary">Batal</a>
                             </div>
                         </form>
                     </div>

@@ -11,12 +11,12 @@ class kategoricontroller extends Controller
     public function index()
     {
         $kategoris = kategori::all();
-        return view('kategori.index', compact('kategoris'));
+        return view('admin.kategori-berelasi.index', compact('kategoris'));
     }
 
     public function create()
     {
-        return view('kategori.tambah');
+        return view('admin.kategori-berelasi.tambah');
     }
 
     public function store(Request $request)
@@ -35,13 +35,13 @@ class kategoricontroller extends Controller
         kategori::create($kategoris);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('kategori.index')->with('success', 'kategori berhasil ditambahkan.');
+        return redirect()->route('admin.kategori-berelasi.index')->with('success', 'kategori berhasil ditambahkan.');
     }
 
     public function edit($id_kategori)
     {
         $kategori = kategori::findOrFail($id_kategori);
-        return view('kategori.edit', compact('kategori'));
+        return view('admin.kategori-berelasi.edit', compact('kategori'));
     }
 
     public function update(Request $request, $id_kategori)
@@ -60,7 +60,7 @@ class kategoricontroller extends Controller
             'deskripsi_kategori' => $request->deskripsi_kategori,
         ]);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
+        return redirect()->route('admin.kategori-berelasi.index')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     
@@ -71,7 +71,7 @@ class kategoricontroller extends Controller
 
         // Periksa apakah kategori ditemukan
         if (!$kategori) {
-            return redirect()->route('kategori.index')->with('error', 'Kategori tidak ditemukan.');
+            return redirect()->route('admin.kategori-berelasi.index')->with('error', 'Kategori tidak ditemukan.');
         }
 
         // Periksa apakah masih ada produk yang terkait dengan kategori
@@ -79,7 +79,7 @@ class kategoricontroller extends Controller
         // dd($produkCount); 
         if ($produkCount > 0) {
             return redirect()
-            ->route('kategori.index')
+            ->route('admin.kategori-berelasi.index')
             ->with('error', 'Tidak dapat menghapus kategori ini karena masih ada produk terkait.')
             ->with('showErrorAlert', true);
         }
@@ -87,6 +87,6 @@ class kategoricontroller extends Controller
         // Hapus kategori jika tidak ada produk terkait
         $kategori->delete();
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('admin.kategori-berelasi.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

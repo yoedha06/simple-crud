@@ -17,7 +17,22 @@
     <div class="container mt-4">
         <center><h1>Toko Baju</h1></center>
         <h2>Kategori</h2>
-        <a href="{{ route('kategori.create') }}" style="margin-top: 10px;" class="btn btn-success">Tambah Kategori</a>
+        <a href="{{ route('admin.kategori-berelasi.create') }}" style="margin-top: 10px;" class="btn btn-success">Tambah Kategori</a>
+        <a href="{{ route('admin.produk-berelasi.index') }}" style="margin-top: 10px;" class="btn btn-success">produk</a>
+
+        <a href="javascript:void(0);" onclick="confirmLogout();" style="color: aliceblue;">
+            <button type="submit" class="btn btn-danger" style="float:right; margin-top:10px;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA2ElEQVR4nO3VMUpDQRCH8V/QdGkEgweJd1BTSQ5hI0RyCrUSBCvxBnl1CCnS23kCLSTeQdAEYcuE7Kx5r8oH0+2fbxlmd9izQ7q4xwSzjHrBaYnkE8tgfeMiIrpLwXcMcbWlrvGaMm8R0TSFRoHMCRap1dnMk+jvprUyLxR1cIbDukWPKVehXafoEj8R2SbRUUaN8JsrWyeqCt7VEg9R0bgpUWOty2Gwq2HYxlNT491BHwe5gVJRK3i++FP9StnwmvjATZ1rovuPxXcuyDFuA6v8Gb2oZI9cVgL1kJA3+TJ2AAAAAElFTkSuQmCC" alt="LOGOUT">
+                Logout
+            </button>
+        </a>
+        <script>
+            function confirmLogout() {
+                if (confirm("Apakah Anda yakin ingin keluar?")) {
+                    window.location.href = "/logout"; // Alamat URL logout
+                }
+            }
+        </script>
         
         @if(session('error'))
             <div class="alert alert-danger" style="margin-top: 20px;">
@@ -49,8 +64,8 @@
                         <td>{{ $kategori->nama_kategori }}</td>
                         <td>{{ $kategori->deskripsi_kategori }}</td>
                         <td>
-                            <a href="{{ route('kategori.edit', $kategori->id_kategori) }}" class="btn btn-warning">Edit</a>
-                            <form id="deleteForm" action="{{ route('kategori.delete', $kategori->id_kategori) }}" method="POST" class="d-inline">
+                            <a href="{{ route('admin.kategori-berelasi.edit', $kategori->id_kategori) }}" class="btn btn-warning">Edit</a>
+                            <form id="deleteForm" action="{{ route('admin.kategori-berelasi.delete', $kategori->id_kategori) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="confirmDelete(event)">Hapus</button>
@@ -70,7 +85,7 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ route('dashboard') }}" class="btn btn-primary">Kembali</a>
+        <a href="{{ route('dashboardadmin') }}" class="btn btn-primary">Kembali</a>
     </div>
 
     <!-- Sesuaikan dengan library JavaScript yang Anda gunakan, contoh menggunakan Bootstrap JS -->

@@ -17,8 +17,9 @@
     <div class="container mt-4">
         <center><h1>Toko Baju</h1></center>
         <h2>Produk</h2>
-        <a href="{{ route('produk.create') }}" style="margin-top: 10px;" class="btn btn-success">Tambah Produk</a>
-    
+        <a href="{{ route('admin.produk-berelasi.create') }}" style="margin-top: 10px;" class="btn btn-success">Tambah Produk</a>
+        <a href="{{ route('admin.kategori-berelasi.index') }}" style="margin-top: 10px;" class="btn btn-success">Kategori</a>
+
         <table class="table" style="margin-top: 10px;">
             <thead>
                 <tr>
@@ -41,28 +42,28 @@
                         <td>{{ $produk->keterangan }}</td>
                         <td>{{ $produk->kategori->nama_kategori }}</td>
                         <td>
-                            <a href="{{ route('produk.edit', $produk->id_produk) }}" class="btn btn-warning">Edit</a>
-                            <form id="deleteForm" action="{{ route('produk.delete', $produk->id_produk) }}" method="POST" class="d-inline">
+                            <a href="{{ route('admin.produk-berelasi.edit', $produk->id_produk) }}" class="btn btn-warning">Edit</a>
+                            <form id="deleteForm-{{ $produk->id_produk }}" action="{{ route('admin.produk-berelasi.delete', $produk->id_produk) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Hapus</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $produk->id_produk }}')">Hapus</button>
                             </form>
+                            
                             <script>
-                                function confirmDelete() {
+                                function confirmDelete(id_produk) {
                                     if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
-                                        document.getElementById('deleteForm').submit();
+                                        document.getElementById('deleteForm-' + id_produk).submit();
                                     } else {
                                         alert("Penghapusan produk dibatalkan.");
                                         // atau tambahkan tindakan lainnya jika diperlukan
                                     }
                                 }
-                            </script>                            
+                            </script>                           
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ route('dashboard') }}" class="btn btn-primary">Kembali</a>
     </div>
     
 

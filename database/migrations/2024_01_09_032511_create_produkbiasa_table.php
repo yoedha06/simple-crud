@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produk', function (Blueprint $table) {
+        Schema::create('produkbiasa', function (Blueprint $table) {
             $table->bigInteger('id_produk')->primary();
-            $table->bigInteger('id_kategori'); 
-            $table->foreign('id_kategori')->references('id_kategori')->on('kategori');
             $table->string('nama_produk');
             $table->decimal('harga', 10, 2); 
             $table->integer('stok');
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produk');
+        Schema::dropIfExists('produkbiasa');
     }
 };

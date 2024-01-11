@@ -17,7 +17,7 @@
                 <div class="card-header">Tambah Kategori</div>
 
                 <div class="card-body">
-                    <form action="{{ route('kategori.store') }}" method="POST">
+                    <form action="{{ route('admin.kategori-berelasi.store') }}" method="POST">
                         @csrf
                     
                         <div class="form-group">
@@ -37,7 +37,7 @@
                     
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Tambah kategori</button>
-                            <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('admin.kategori-berelasi.index') }}" class="btn btn-secondary">Batal</a>
                         </div>
                     </form>                    
                 </div>

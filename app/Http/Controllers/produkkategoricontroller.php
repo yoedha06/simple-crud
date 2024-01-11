@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 
 class produkkategoricontroller extends Controller
 {
-    public function dashboard()
+    public function dashboardadmin()
     {
-        return view('dashboard');
+        return view('dashboardadmin');
+    }
+
+    public function dashboardstaff()
+    {
+        return view('dashboardstaff');
     }
 }
